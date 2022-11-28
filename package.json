@@ -3,6 +3,15 @@
   "version": "1.0.0",
   "description": "Core JS 101",
   "scripts": {
+    "all": "npm test",
+    "task1": "npm test ./src/01-strings-tasks",
+    "task2": "npm test ./src/02-numbers-tasks",
+    "task3": "npm test ./src/03-arrays-tasks",
+    "task4": "npm test ./src/04-date-tasks",
+    "task5": "npm test ./src/05-objects-tasks",
+    "task6": "npm test ./src/06-promises-tasks",
+    "task7": "npm test ./src/07-conditions-n-loops-tasks",
+    "task8": "npm test ./src/08-functions-n-closures-tasks",
     "test": "npm run lint && mocha",
     "lint": "node node_modules/eslint/bin/eslint.js ./src",
     "lint:fix": "node node_modules/eslint/bin/eslint.js ./src --fix"
