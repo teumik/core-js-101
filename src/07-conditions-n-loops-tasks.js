@@ -338,8 +338,25 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const temp = [];
+  const map = {
+    '{': '}',
+    '(': ')',
+    '[': ']',
+    '<': '>',
+  };
+
+  for (let i = 0; i < str.length; i += 1) {
+    if (map[str[i]]) {
+      temp.push(str[i]);
+    } else if (map[temp[temp.length - 1]] === str[i]) {
+      temp.pop();
+    } else {
+      temp.push(str[i]);
+    }
+  }
+  return !temp.length;
 }
 
 
@@ -363,8 +380,14 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  let number = num;
+  const arr = [];
+  while (number >= 1) {
+    arr.push(Math.floor(number % n));
+    number /= n;
+  }
+  return arr.reverse().join('');
 }
 
 
@@ -380,8 +403,23 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const matrix = pathes.map((el) => el.split('/')).sort((a, b) => a.length - b.length);
+  if (matrix.some((el) => el[0] !== '')) {
+    return '';
+  }
+  const path = ['/'];
+
+  for (let i = 0; i < matrix[0].length; i += 1) {
+    const temp = [];
+    for (let j = 0; j < matrix.length; j += 1) {
+      temp.push(matrix[j][i]);
+    }
+    if (new Set(temp).size === 1 && temp[0] !== '') {
+      path.push(`${temp[0]}/`);
+    }
+  }
+  return path.join('');
 }
 
 
@@ -403,8 +441,20 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const result = [];
+  for (let i = 0; i < m1.length; i += 1) {
+    const temp = [];
+    for (let j = 0; j < m2[0].length; j += 1) {
+      let sum = 0;
+      for (let k = 0; k < m1[0].length; k += 1) {
+        sum += m1[i][k] * m2[k][j];
+      }
+      temp.push(sum);
+    }
+    result.push(temp);
+  }
+  return result;
 }
 
 
