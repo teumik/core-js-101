@@ -488,8 +488,21 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  const axis = ['012', '345', '678', '036', '147', '258', '048', '246'];
+  const flatBoard = position.map((el, _, arr) => {
+    while (el.length < arr.length) el.push(undefined);
+    return el;
+  }).flat();
+  const cross = axis.some((el) => el.split('')
+    .every((i) => flatBoard[i] === 'X'));
+  if (cross) return 'X';
+
+  const zero = axis.some((el) => el.split('')
+    .every((i) => flatBoard[i] === '0'));
+  if (zero) return '0';
+
+  return undefined;
 }
 
 
